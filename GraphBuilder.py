@@ -1,4 +1,5 @@
 import networkx as nx
+import matplotlib.pyplot as pl
 
 """
 A class for parsing graphs.
@@ -12,6 +13,8 @@ class GraphBuilder:
         with open(filepath, encoding="utf-8") as f:
             n, m, r = map(int, next(f).split())
             s, t = next(f).split()
+            G.graph["start"] = s
+            G.graph["target"] = t
 
             # Building a vertex
             for _ in range(n):
@@ -39,4 +42,21 @@ class GraphBuilder:
                     print("directed edge between " + a,b)
             print("-----Sanity Check -----")
             print(m,n,r,s,t)
+            print(G.graph["start"])
+            print(G.graph["target"])
         return G
+
+    def DrawGraph(G):
+        s, t = G.graph["start"], G.graph["target"]
+
+        edgecolors = ["green" if v == s else "gold" if v == t else "none" for v in G.nodes]
+        colors = [G.nodes[v]["color"] for v in G.nodes]
+
+        nx.draw(G, 
+                with_labels=True, 
+                node_color=colors, 
+                font_color="lightblue",
+                edgecolors=edgecolors,
+                linewidths=3
+            )
+        pl.show()
