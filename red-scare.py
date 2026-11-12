@@ -1,14 +1,16 @@
 import networkx as nx
 import GraphBuilder as gb
-import none as nr
+from problems.none import No_reds_shortespath as nr
 
 def main(filepath):
     print("Hello World")
 
     # Parse file to generate graph
     G = gb.GraphBuilder.BuildGraph(filepath)
-    gb.GraphBuilder.DrawGraph(nr.no_reds.No_reds_shortespath(G))
+    graph, size = nr(G)
+    print("size ", size)
+    gb.GraphBuilder.DrawGraph(graph)
     
 
 if __name__ == "__main__":
-    main("data/wall-n-1.txt")
+    main("data/ski-level20-2.txt")
