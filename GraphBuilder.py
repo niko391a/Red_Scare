@@ -24,10 +24,10 @@ class GraphBuilder:
                 if len(vertex) > 1:
                     G.add_node(vertex[0], color="red")
                     # No sanity check for now not checking reds count
-                    print("Red " + vertex[0])
+                    #print("Red " + vertex[0])
                 else:
                     G.add_node(vertex[0], color="black")
-                    print("black " + vertex[0])
+                    #print("black " + vertex[0])
             
             # Building an edge    
             for _ in range(m):
@@ -36,14 +36,14 @@ class GraphBuilder:
                 if edge == "--": # Undirected
                     G.add_edge(a,b)
                     G.add_edge(b,a)
-                    print("un directed edge between " + a,b)
+                    #print("un-directed edge between " + a,b)
                 else: # Directed
                     G.add_edge(a,b)
-                    print("directed edge between " + a,b)
-            print("-----Sanity Check -----")
-            print(m,n,r,s,t)
-            print(G.graph["start"])
-            print(G.graph["target"])
+                    #print("directed edge between " + a,b)
+            # print("-----Sanity Check -----")
+            # print(m,n,r,s,t)
+            # print(G.graph["start"])
+            # print(G.graph["target"])
         return G
 
     def DrawGraph(G):

@@ -16,6 +16,7 @@ def No_reds_shortespath(g):
     
     # If start or target vertex is red, return -1
     if start_vertex['color'] == 'red' or target_vertex['color'] == 'red':
+        print("fucked up 1")
         return g,-1
 
     for verticie, data in g.nodes(data=True):
@@ -24,8 +25,9 @@ def No_reds_shortespath(g):
     G_noReds = g.subgraph(black_verticies)
 
     try:
-        size = nx.shortest_path_length(G_noReds, source=g.graph["start"], target=g.graph["target"],method="unweighted") # targers unweighted that is BFS = "unweighted"
+        size = nx.shortest_path_length(G_noReds, source=g.graph["start"], target=g.graph["target"]) # Dijkstra = method="dijkstra", BF = method="bellman-ford"
     except:
+        print("fucked up 2")
         return G_noReds,-1
     # Holds true and it must be possible to gen a shortpath
     return G_noReds,size
