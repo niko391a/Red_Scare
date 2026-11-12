@@ -24,7 +24,7 @@ def No_reds_shortespath(g):
     G_noReds = g.subgraph(black_verticies)
 
     try:
-        size = nx.shortest_path_length(G_noReds, source=g.graph["start"], target=g.graph["target"] method=unweighted)
+        size = nx.shortest_path_length(G_noReds, source=g.graph["start"], target=g.graph["target"],method="unweighted") # targers unweighted that is BFS = "unweighted"
     except:
         return G_noReds,-1
     # Holds true and it must be possible to gen a shortpath
