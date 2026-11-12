@@ -1,19 +1,16 @@
-def main():
+import matplotlib.pyplot as pl
+import networkx as nx
+import GraphBuilder as gb
+
+def main(filepath):
     print("Hello World")
 
-main()
+    # Parse file to generate graph
+    G = gb.GraphBuilder.BuildGraph(filepath)
+    colors = [G.nodes[v]["color"] for v in G.nodes]
+    nx.draw(G, with_labels=True, node_color=colors, font_color="lightblue")
+    pl.show()
 
-
-def None (graph g):
-# Needs to take the verticies from the redset and remove them from the graphs, verticies. Then run BFS
-
-# If it not possible -1 if it is possible the length of the pass.
-
-
-def GraphReader(filepath):
-    n, m, r = int(input().split(" "))
-    s, t = int(input().split)
-
-
-
-
+path = "data/wall-n-100.txt"
+# path = "data/common-1-20.txt"
+main(path)
