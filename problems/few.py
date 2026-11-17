@@ -13,9 +13,9 @@ import networkx as nx
 
 def few(g):
     red_verticies = []
-    for verticie, data in g.nodes(data=True):
+    for vertice, data in g.nodes(data=True):
             if data.get("color") == "red":
-                red_verticies.append(verticie)
+                red_verticies.append(vertice)
     '''
             -------
         edges : OutEdgeView
@@ -43,4 +43,4 @@ def few(g):
         if v in red_verticies:
               redcount += 1
     
-    return g,redcount
+    return g.redcount
