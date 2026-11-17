@@ -2,12 +2,12 @@ import networkx as nx
 # https://networkx.org/documentation/stable/reference/algorithms/shortest_paths.html
 
 def No_reds_shortespath(g):
-# Needs to take the verticies from the redset and remove them from the graphs, verticies. Then run BFS
+# Needs to take the vertices from the redset and remove them from the graphs, vertices. Then run BFS
 # If it not possible -1 if it is possible the length of the pass.
     # Idea either remove reds or make a subset of reds
-# Generate a sungraph from the Black verticies https://networkx.org/documentation/stable/reference/classes/generated/networkx.Graph.subgraph.html
+# Generate a sungraph from the Black vertices https://networkx.org/documentation/stable/reference/classes/generated/networkx.Graph.subgraph.html
 # Specifiec that it can be generated from an iterable list
-    black_verticies = []
+    black_vertices = []
 
     # start_vertex =  g.nodes[g.graph["start"]]['color']
     # target_vertex = g.nodes[g.graph["target"]]['color']
@@ -19,10 +19,10 @@ def No_reds_shortespath(g):
         print("fucked up 1")
         return g,-1
 
-    for verticie, data in g.nodes(data=True):
+    for vertex, data in g.nodes(data=True):
         if data.get("color") != "red":
-            black_verticies.append(verticie)
-    G_noReds = g.subgraph(black_verticies)
+            black_vertices.append(vertex)
+    G_noReds = g.subgraph(black_vertices)
 
     try:
         size = nx.shortest_path_length(G_noReds, source=g.graph["start"], target=g.graph["target"]) # Dijkstra = method="dijkstra", BF = method="bellman-ford"

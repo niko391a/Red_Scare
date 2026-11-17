@@ -25,7 +25,7 @@ def few(g):
         --------
     '''
     for (u,v) in g.edges:
-        if v in red_verticies:
+        if v in red_vertices:
             g.edges[u,v]['weight'] = 1
         else:
             g.edges[u,v]['weight'] = 0
@@ -38,7 +38,7 @@ def few(g):
     # path is a list of verticies / nodes
     redcount = 0
     for v in path:
-        if v in red_verticies:
+        if v in red_vertices:
               redcount += 1
     
-    return g.redcount
+    return g, redcount
