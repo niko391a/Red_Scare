@@ -3,10 +3,10 @@
 import networkx as nx
 
 def many(g):
-    red_verticies = []
-    for verticie, data in g.nodes(data=True):
+    red_vertices = set()
+    for vertex, data in g.nodes(data=True):
             if data.get("color") == "red":
-                red_verticies.append(verticie)
+                red_vertices.add(vertex)
     maxi = 0
     try:
         for path in nx.all_simple_paths(g, source=g.graph["start"], target=g.graph["target"]): # Get all simple paths

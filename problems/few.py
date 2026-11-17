@@ -3,19 +3,17 @@
 # upgrade to a weighted graph, where the edge between a black to red or red to red is set at max, this is like the ferry to bornholm in map of denmark
 # Meaning that if no other path exist from source to target, then we are forced to touch the red increasing the weight
 # And it will go for the lowest weighted to gen a shortest path Using bellman ford or dijkstra, since no negative dijkstra is probably better
-# black→red: 100
-# red→red: 100
+# black→red: 1
+# red→red: 1
 # red→black: 0
 # black→black: 0
-# These are the cases
-# At the same time, count the amount of reds you meet on the way
 import networkx as nx
 
 def few(g):
-    red_verticies = []
+    red_vertices = set()
     for vertice, data in g.nodes(data=True):
             if data.get("color") == "red":
-                red_verticies.append(vertice)
+                red_vertices.add(vertice)
     '''
             -------
         edges : OutEdgeView
