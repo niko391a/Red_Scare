@@ -28,7 +28,7 @@ def few(g):
     '''
     for (u,v) in g.edges:
         if v in red_verticies:
-            g.edges[u,v]['weight'] = 1000
+            g.edges[u,v]['weight'] = 1
         else:
             g.edges[u,v]['weight'] = 0
 
