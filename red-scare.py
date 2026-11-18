@@ -1,23 +1,21 @@
 import networkx as nx
 import GraphBuilder as gb
-import benchmark
-from problems.none import No_reds_shortespath as nr
+# import benchmark
+from problems.none import none
 from problems.few import few
 from problems.many import many
 
-SHOULD_DRAW = False
-FILEPATH = "data/grid-50-1.txt"
+SHOULD_DRAW = True
+FILEPATH = "data/ski-level3-3.txt"
 
 def RunNone(G):
-    start = benchmark.GetTime()
-    graph, size = nr(G)
-    end = benchmark.GetTime()
+    # start = benchmark.GetTime()
+    graph, size = none(G)
+    # end = benchmark.GetTime()
     print("size ", size)
-    benchmark.PrintFormattedTime("None", FILEPATH, "BFS", end - start)
-
+    # benchmark.PrintFormattedTime("None", FILEPATH, "BFS", end - start)
     if SHOULD_DRAW:
-        gb.GraphBuilder.DrawGraph(graph)
-
+            gb.GraphBuilder.DrawGraph(graph)
 
 def RunFew(G):
     graph, size = few(G)

@@ -1,13 +1,13 @@
 import networkx as nx
 # https://networkx.org/documentation/stable/reference/algorithms/shortest_paths.html
 
-def No_reds_shortespath(g):
+def none(g):
 # Needs to take the vertices from the redset and remove them from the graphs, vertices. Then run BFS
 # If it not possible -1 if it is possible the length of the pass.
     # Idea either remove reds or make a subset of reds
 # Generate a sungraph from the Black vertices https://networkx.org/documentation/stable/reference/classes/generated/networkx.Graph.subgraph.html
 # Specifiec that it can be generated from an iterable list
-    black_vertices = []
+    black_vertices = set()
 
     # start_vertex =  g.nodes[g.graph["start"]]['color']
     # target_vertex = g.nodes[g.graph["target"]]['color']
@@ -21,7 +21,7 @@ def No_reds_shortespath(g):
 
     for vertex, data in g.nodes(data=True):
         if data.get("color") != "red":
-            black_vertices.append(vertex)
+            black_vertices.add(vertex)
     G_noReds = g.subgraph(black_vertices)
 
     try:
