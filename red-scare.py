@@ -9,13 +9,6 @@ SHOULD_DRAW = False
 FILEPATH = "data/ski-level3-3.txt"
 
 def RunNone(G):
-    # start = benchmark.GetTime()
-    # graph, size = nr(G)
-    RunNone(G)
-    # end = benchmark.GetTime()
-    # benchmark.PrintFormattedTime("None", FILEPATH, "BFS", end - start)
-
-def RunNone(G):
     graph, size = none(G)
     print("size ", size)
     if SHOULD_DRAW:
