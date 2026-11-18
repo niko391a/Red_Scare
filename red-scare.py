@@ -5,7 +5,7 @@ from problems.none import none
 from problems.few import few
 from problems.many import many
 
-SHOULD_DRAW = True
+SHOULD_DRAW = False
 FILEPATH = "data/ski-level3-3.txt"
 
 def RunNone(G):
