@@ -15,7 +15,6 @@ def many(g):
                     if v in red_vertices:
                           redcount =+ 1
                     maxi=max(redcount,maxi)      
-            print(path)
     except:
         print("fucked up 2")
         return g,-1
