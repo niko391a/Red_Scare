@@ -4,14 +4,15 @@ import GraphBuilder as gb
 from problems.none import none
 from problems.few import few
 from problems.many import many
+from problems.alternate import alternate
 
-SHOULD_DRAW = True
+SHOULD_DRAW = False
 FILEPATH = "data/ski-level3-3.txt"
 
 def RunNone(G):
     graph, size = none(G)
 
-    print("size None ", size)
+    print("Length of None: ", size)
     '''
     if SHOULD_DRAW:
             gb.GraphBuilder.DrawGraph(graph)
@@ -20,13 +21,20 @@ def RunNone(G):
 
 def RunFew(G):
     graph, size = few(G)
-    print("size few", size)
+    print("few: amount of red verticies: ", size)
+
     if SHOULD_DRAW:
             gb.GraphBuilder.DrawGraph(graph)
 
 def RunMany(G):
     graph, size = many(G)
-    print("size many ", size)
+    print("Many: Most reds: ", size)
+    '''
+    if SHOULD_DRAW:
+            gb.GraphBuilder.DrawGraph(graph)
+    '''
+def RunAlternate(G):
+    print("is alternate: ", alternate(G))
     '''
     if SHOULD_DRAW:
             gb.GraphBuilder.DrawGraph(graph)
@@ -41,20 +49,24 @@ def main():
             RunNone(G)
             RunFew(G)
             RunMany(G)
+            RunAlternate(G)
         else:
             RunNone(G)
             RunFew(G)
             # directed with cycles
             print("Many is Np Hard") # many us NP-Hard of directed with cycles
+            RunAlternate(G)
     else: # is undirected
         if nx.is_forest(G): # undirected Asyclic.
             RunNone(G)
             RunFew(G)
             RunMany(G)
+            RunAlternate(G)
         else:
             RunNone(G)
             RunFew(G)
             print("Many is Np Hard")  # undirected with cycles: Many is NP-hard
+            RunAlternate(G)
         pass
 
 if __name__ == "__main__":
