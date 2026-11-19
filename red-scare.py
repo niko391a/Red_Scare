@@ -30,7 +30,24 @@ def RunMany(G):
 def main():
     # Parse file to generate graph
     G = gb.GraphBuilder.BuildGraph(FILEPATH)
-    RunNone(G)
+    if G.is_directed():
+        if nx.is_directed_acyclic_graph(G): # DAG Directed Acyclic
+            RunNone(G)
+            RunFew(G)
+        else:
+            RunNone(G)
+            RunFew(G)
+            # directed with cycles
+            print("?!") # many us NP-Hard of directed with cycles
+    else: # is undirected
+        if nx.is_forest(G): # undirected Asyclic.
+            RunNone(G)
+            RunFew(G)
+        else:
+            RunNone(G)
+            RunFew(G)
+            print("?!")  # undirected with cycles: Many is NP-hard
+        pass
 
 if __name__ == "__main__":
     main()
