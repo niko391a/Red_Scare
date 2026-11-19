@@ -1,12 +1,19 @@
 import networkx as nx
 import GraphBuilder as gb
-import benchmark
+# import benchmark
+from problems.alternate import alternate
 from problems.none import none
 from problems.few import few
 from problems.many import many
 
-SHOULD_DRAW = False
-FILEPATH = "data/ski-level3-3.txt"
+SHOULD_DRAW = True
+FILEPATH = "data/grid-5-0.txt"
+
+def RunAlternate(G):
+    hasPath = alternate(G)
+    print(f"Is there an alternating path: {hasPath}")
+    if SHOULD_DRAW:
+        gb.GraphBuilder.DrawGraph(G)
 
 def RunNone(G):
     graph, size = none(G)
@@ -30,7 +37,7 @@ def RunMany(G):
 def main():
     # Parse file to generate graph
     G = gb.GraphBuilder.BuildGraph(FILEPATH)
-    RunNone(G)
+    RunAlternate(G)
 
 if __name__ == "__main__":
     main()
