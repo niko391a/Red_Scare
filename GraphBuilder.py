@@ -1,5 +1,5 @@
+import os
 import networkx as nx
-import matplotlib.pyplot as pl
 
 """
 A class for parsing graphs.
@@ -9,7 +9,9 @@ Args:
 class GraphBuilder:
     def BuildGraph(filepath):
         G = nx.DiGraph()
-        
+        # File name (e.g. "grid-5-0"): used by GraphDrawer for the title and layout choice
+        G.graph["name"] = os.path.splitext(os.path.basename(filepath))[0]
+
         with open(filepath, encoding="utf-8") as f:
             n, m, r = map(int, next(f).split())
             s, t = next(f).split()
@@ -45,18 +47,3 @@ class GraphBuilder:
             # print(G.graph["start"])
             # print(G.graph["target"])
         return G
-
-    def DrawGraph(G):
-        s, t = G.graph["start"], G.graph["target"]
-
-        edgecolors = ["green" if v == s else "gold" if v == t else "none" for v in G.nodes]
-        colors = [G.nodes[v]["color"] for v in G.nodes]
-
-        nx.draw(G, 
-                with_labels=True, 
-                node_color=colors, 
-                font_color="lightblue",
-                edgecolors=edgecolors,
-                linewidths=3
-            )
-        pl.show()
