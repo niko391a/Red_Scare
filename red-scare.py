@@ -1,10 +1,12 @@
 import networkx as nx
 import GraphBuilder as gb
+import GraphDrawer as gd
 # import benchmark
 from problems.none import none
 from problems.few import few
 from problems.many import manydp
 from problems.alternate import alternate
+from problems.some import some
 
 SHOULD_DRAW = False
 FILEPATH = "data/increase-n500-3.txt"
@@ -15,7 +17,7 @@ def RunNone(G):
     print("Length of None: ", size)
     '''
     if SHOULD_DRAW:
-            gb.GraphBuilder.DrawGraph(graph)
+            gd.DrawGraph(graph)
     '''
 
 
@@ -24,22 +26,26 @@ def RunFew(G):
     print("few: amount of red verticies: ", size)
 
     if SHOULD_DRAW:
-            gb.GraphBuilder.DrawGraph(graph)
+            gd.DrawGraph(graph)
 
 def RunMany(G,isdag):
     size = manydp(G,isdag)
     print("Many: Most reds: ", size)
     '''
     if SHOULD_DRAW:
-            gb.GraphBuilder.DrawGraph(graph)
+            gd.DrawGraph(graph)
     '''
 def RunAlternate(G):
     print("is alternate: ", alternate(G))
     '''
     if SHOULD_DRAW:
-            gb.GraphBuilder.DrawGraph(graph)
+            gd.DrawGraph(graph)
     '''
-            
+def RunSome(G):
+    print(f"is some true: {some(G)}")
+    if SHOULD_DRAW:
+        gd.DrawGraph(G)
+
 def main():
     # Parse file to generate graph
     G = gb.GraphBuilder.BuildGraph(FILEPATH)
