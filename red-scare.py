@@ -3,11 +3,11 @@ import GraphBuilder as gb
 # import benchmark
 from problems.none import none
 from problems.few import few
-from problems.many import many
+from problems.many import manydp
 from problems.alternate import alternate
 
 SHOULD_DRAW = False
-FILEPATH = "data/ski-level3-3.txt"
+FILEPATH = "data/increase-n500-3.txt"
 
 def RunNone(G):
     graph, size = none(G)
@@ -26,8 +26,8 @@ def RunFew(G):
     if SHOULD_DRAW:
             gb.GraphBuilder.DrawGraph(graph)
 
-def RunMany(G):
-    graph, size = many(G)
+def RunMany(G,isdag):
+    size = manydp(G,isdag)
     print("Many: Most reds: ", size)
     '''
     if SHOULD_DRAW:
@@ -48,7 +48,7 @@ def main():
             print("Is DAG")
             RunNone(G)
             RunFew(G)
-            RunMany(G)
+            RunMany(G,True)
             RunAlternate(G)
         else:
             RunNone(G)
@@ -60,7 +60,7 @@ def main():
         if nx.is_forest(G): # undirected Asyclic.
             RunNone(G)
             RunFew(G)
-            RunMany(G)
+            RunMany(G,False)
             RunAlternate(G)
         else:
             RunNone(G)
