@@ -7,14 +7,14 @@ def many(g):
     for vertex, data in g.nodes(data=True):
             if data.get("color") == "red":
                 red_vertices.add(vertex)
-    maxi = 0
+    maxi = -1
     try:
         for path in nx.all_simple_paths(g, source=g.graph["start"], target=g.graph["target"]): # Get all simple paths
             redcount = 0
             for v in path:
                     if v in red_vertices:
-                          redcount =+ 1
-                    maxi=max(redcount,maxi)      
+                          redcount += 1
+            maxi=max(redcount,maxi)      
     except:
         print("fucked up 2")
         return g,-1
