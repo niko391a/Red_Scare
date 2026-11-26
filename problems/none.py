@@ -16,7 +16,6 @@ def none(g):
     
     # If start or target vertex is red, return -1
     if start_vertex['color'] == 'red' or target_vertex['color'] == 'red':
-        print("fucked up 1")
         return g,-1
 
     for vertex, data in g.nodes(data=True):

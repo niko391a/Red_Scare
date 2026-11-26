@@ -5,9 +5,9 @@
 
 # Based on implementation from https://www.geeksforgeeks.org/dsa/depth-first-search-or-dfs-for-a-graph/
 def dfs_rec(visited, current_node, g, target, has_a_red_so_far):
-
+    print(current_node, target)
     if current_node == target:
-        if has_a_red_so_far: return True
+        if has_a_red_so_far or g.nodes[target]['color'] == "red": return True
         else: return False
 
     # Process the node (e.g., print it)

@@ -23,57 +23,54 @@ def RunNone(G):
 
 def RunFew(G):
     graph, size = few(G)
-    print("few: amount of red verticies: ", size)
+    print("Few: ", size)
 
     if SHOULD_DRAW:
             gd.DrawGraph(graph)
 
 def RunMany(G,isdag):
     size = manydp(G,isdag)
-    print("Many: Most reds: ", size)
+    print("Many: ", size)
     '''
     if SHOULD_DRAW:
             gd.DrawGraph(graph)
     '''
 def RunAlternate(G):
-    print("is alternate: ", alternate(G))
+    print("Alternate: ", alternate(G))
     '''
     if SHOULD_DRAW:
             gd.DrawGraph(graph)
     '''
 def RunSome(G):
-    print(f"is some true: {some(G)}")
+    print(f"Some: {some(G)}")
+    '''
     if SHOULD_DRAW:
         gd.DrawGraph(G)
+    '''
 
 def main():
     # Parse file to generate graph
     G = gb.GraphBuilder.BuildGraph(FILEPATH)
+    print("n: ", G.number_of_nodes())
+    RunAlternate(G)
+    RunFew(G)
     if G.is_directed():
         if nx.is_directed_acyclic_graph(G): # DAG Directed Acyclic
-            print("Is DAG")
-            RunNone(G)
-            RunFew(G)
             RunMany(G,True)
-            RunAlternate(G)
+            RunSome(G)
         else:
-            RunNone(G)
-            RunFew(G)
             # directed with cycles
             print("Many is Np Hard") # many us NP-Hard of directed with cycles
-            RunAlternate(G)
+            print("Some is Np Hard")
     else: # is undirected
         if nx.is_forest(G): # undirected Asyclic.
-            RunNone(G)
-            RunFew(G)
             RunMany(G,False)
-            RunAlternate(G)
+            RunSome(G)
         else:
-            RunNone(G)
-            RunFew(G)
             print("Many is Np Hard")  # undirected with cycles: Many is NP-hard
-            RunAlternate(G)
+            print("Some is Np Hard")
         pass
+    RunNone(G)
 
 if __name__ == "__main__":
     main()

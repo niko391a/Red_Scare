@@ -7,6 +7,7 @@ Args:
     filepath: path for the file to be parsed.
 """
 class GraphBuilder:
+
     def BuildGraph(filepath):
         G = nx.DiGraph()
         # File name (e.g. "grid-5-0"): used by GraphDrawer for the title and layout choice
