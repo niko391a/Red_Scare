@@ -62,8 +62,23 @@ def main():
         if nx.is_forest(G.to_undirected()): # undirected Asyclic.
             M = RunMany(G,False)
         S = RunSome(G, False)
+  
+    # Bound-based fallback depending on resulsts of already calculated values
+    if M == "?!":
+        n_red_vertices = 0
+        for _, color in G.nodes(data="color"):
+            if color == "red": n_red_vertices += 1
 
-    # If M or S is NOT run above they are NP-hard.
+        if F == -1: # no s, t path at all
+            M = -1
+        elif S is False: # paths exist but none touch a red vertex
+            M = 0
+        elif F == n_red_vertices: # even the minimum uses every red vertex so many must also use all
+            M = n_red_vertices
+        elif S is True and n_red_vertices == 1: # some path hits the single red vertex
+            M = 1
+
+    # If M or S is still "?!" then this graph lies outside the classes our algorithms handle and the problem is NP-hard.
 
     print(f"{G.number_of_nodes():,}", *map(fmt, [A, F, M, N, S]), sep="\t")
 
