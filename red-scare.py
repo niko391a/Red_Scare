@@ -7,70 +7,66 @@ from problems.few import few
 from problems.many import manydp
 from problems.alternate import alternate
 from problems.some import some
+import sys
 
 SHOULD_DRAW = False
 FILEPATH = "data/increase-n500-3.txt"
 
+# Format function to adhere to example table
+def fmt(value):
+    if value is None or value == -1:
+        return "-"
+    if isinstance(value, bool):
+        return str(value).lower()
+    return str(value)
+
 def RunNone(G):
-    graph, size = none(G)
-
-    print("Length of None: ", size)
-    '''
-    if SHOULD_DRAW:
-            gd.DrawGraph(graph)
-    '''
-
+    _, size = none(G)
+    #print("Length of None: ", size)
+    return size
 
 def RunFew(G):
-    graph, size = few(G)
-    print("Few: ", size)
-
-    if SHOULD_DRAW:
-            gd.DrawGraph(graph)
+    _, size = few(G)
+    #print("Few: ", size)
+    return size
 
 def RunMany(G,isdag):
-    size = manydp(G,isdag)
-    print("Many: ", size)
-    '''
-    if SHOULD_DRAW:
-            gd.DrawGraph(graph)
-    '''
+    #print("Many: ", size)
+    return manydp(G,isdag)
+    
 def RunAlternate(G):
-    print("Alternate: ", alternate(G))
-    '''
-    if SHOULD_DRAW:
-            gd.DrawGraph(graph)
-    '''
+    #print("Alternate: ", alternate(G))
+    return alternate(G)
+    
 def RunSome(G):
-    print(f"Some: {some(G)}")
-    '''
-    if SHOULD_DRAW:
-        gd.DrawGraph(G)
-    '''
+    #print(f"Some: {some(G)}")
+    return "someValue"#some(G)
 
 def main():
+    path = sys.argv[1] if len(sys.argv) > 1 else FILEPATH
     # Parse file to generate graph
-    G = gb.GraphBuilder.BuildGraph(FILEPATH)
+    G = gb.GraphBuilder.BuildGraph(path)
+
     print("n: ", G.number_of_nodes())
-    RunAlternate(G)
-    RunFew(G)
+    
+    A = RunAlternate(G)
+    F = RunFew(G)
+    N = RunNone(G)
+    M = S = "?" # keeps "?" if the problem is NP-hard
+    
     if G.graph["directed"]:
         if nx.is_directed_acyclic_graph(G): # DAG Directed Acyclic
-            RunMany(G,True)
-            RunSome(G)
-        else:
-            # directed with cycles
-            print("Many is Np Hard") # many us NP-Hard of directed with cycles
-            print("Some is Np Hard")
+            M = RunMany(G,True)
+            S = RunSome(G)
     else: # is undirected
         if nx.is_forest(G.to_undirected()): # undirected Asyclic.
-            RunMany(G,False)
-            RunSome(G)
-        else:
-            print("Many is Np Hard")  # undirected with cycles: Many is NP-hard
-            print("Some is Np Hard")
-        pass
-    RunNone(G)
+            M = RunMany(G,False)
+        S = RunSome(G)
+
+    print(f"{G.number_of_nodes():,}", *map(fmt, [A, F, M, N, S]), sep="\t")
+
+    if SHOULD_DRAW and "--no-draw" not in sys.argv:
+        gd.DrawGraph(G)
 
 if __name__ == "__main__":
     main()
