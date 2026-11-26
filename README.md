@@ -1,15 +1,14 @@
 # Red_Scare
 Group A - Algorithm Design, MSc CS (Autumn 2026)
 
-# Venv
-activate:
-`source .venv/bin/activate`
+## Setup Venv
+1) Create: `python -m venv .venv`
+2) Activate: `source .venv/bin/activate`
+3) Install libraries: `pip install -r requirements.txt`
+4) Deactivate when done: `deactivate`
 
-deactivate:
-`deactivate`
-
-# To Install
-pip install matplotlib
-pip install networkx
-pip install scipy
+## To Install without venv
+```
+pip install matplotlib networkx scipy PyQt6
+```
 
