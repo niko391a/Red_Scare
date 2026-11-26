@@ -32,6 +32,7 @@ class GraphBuilder:
                     G.add_node(vertex[0], color="black")
                     #print("black " + vertex[0])
             
+            G.graph["directed"] = False # Tag for directed or undirected
             # Building an edge    
             for _ in range(m):
                 a, edge, b = next(f).strip().split(" ")
@@ -41,6 +42,7 @@ class GraphBuilder:
                     G.add_edge(b,a)
                     #print("un-directed edge between " + a,b)
                 else: # Directed
+                    G.graph["directed"] = True
                     G.add_edge(a,b)
                     #print("directed edge between " + a,b)
             # print("-----Sanity Check -----")

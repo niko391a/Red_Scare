@@ -54,7 +54,7 @@ def main():
     print("n: ", G.number_of_nodes())
     RunAlternate(G)
     RunFew(G)
-    if G.is_directed():
+    if G.graph["directed"]:
         if nx.is_directed_acyclic_graph(G): # DAG Directed Acyclic
             RunMany(G,True)
             RunSome(G)
@@ -63,7 +63,7 @@ def main():
             print("Many is Np Hard") # many us NP-Hard of directed with cycles
             print("Some is Np Hard")
     else: # is undirected
-        if nx.is_forest(G): # undirected Asyclic.
+        if nx.is_forest(G.to_undirected()): # undirected Asyclic.
             RunMany(G,False)
             RunSome(G)
         else:
