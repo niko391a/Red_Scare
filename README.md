@@ -13,3 +13,7 @@ pip install matplotlib
 pip install networkx
 pip install scipy
 
+# Generate results.txt
+The command below will generate a text file in the root folder called `results.txt`:
+
+`python .\runAll.py`
