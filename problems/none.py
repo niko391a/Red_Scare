@@ -9,24 +9,17 @@ def none(g):
 # Specifiec that it can be generated from an iterable list
     black_vertices = set()
 
-    # start_vertex =  g.nodes[g.graph["start"]]['color']
-    # target_vertex = g.nodes[g.graph["target"]]['color']
-    start_vertex =  g.nodes[g.graph["start"]]
-    target_vertex = g.nodes[g.graph["target"]]
+    s = g.graph["start"]
+    t = g.graph["target"]
     
-    # If start or target vertex is red, return -1
-    if start_vertex['color'] == 'red' or target_vertex['color'] == 'red':
-        return g,-1
-
     for vertex, data in g.nodes(data=True):
-        if data.get("color") != "red":
+        if data.get("color") != "red" or vertex in (s, t):
             black_vertices.add(vertex)
     G_noReds = g.subgraph(black_vertices)
 
     try:
-        size = nx.shortest_path_length(G_noReds, source=g.graph["start"], target=g.graph["target"]) # Dijkstra = method="dijkstra", BF = method="bellman-ford"
-    except:
-        print("fucked up 2")
+        size = nx.shortest_path_length(G_noReds, source=s, target=t) # Dijkstra = method="dijkstra", BF = method="bellman-ford"
+    except nx.NetworkXNoPath:
         return G_noReds,-1
     # Holds true and it must be possible to gen a shortpath
     return G_noReds,size
