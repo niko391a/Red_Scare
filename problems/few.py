@@ -33,7 +33,7 @@ def few(g):
     try:
         path = nx.shortest_path(g, source=g.graph["start"], target=g.graph["target"],weight="weight", method="dijkstra") # targers unweighted that is BFS = "unweighted"
     except:
-        print("fucked up 2")
+        # print("fucked up 2")
         return g,-1
     # path is a list of verticies / nodes
     redcount = 0
