@@ -1,4 +1,7 @@
 """
+Utility methods defined entirely by Claude.
+So all credit to it.
+
 Drawing of Red Scare graphs built by GraphBuilder.BuildGraph.
 
 Usage:
