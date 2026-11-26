@@ -15,7 +15,7 @@ FILEPATH = "data/increase-n500-3.txt"
 # Format function to adhere to example table
 def fmt(value):
     if value is None or value == -1:
-        return "-"
+        return "-1"
     if isinstance(value, bool):
         return str(value).lower()
     return str(value)
@@ -38,9 +38,9 @@ def RunAlternate(G):
     #print("Alternate: ", alternate(G))
     return alternate(G)
     
-def RunSome(G):
+def RunSome(G, isDAG):
     #print(f"Some: {some(G)}")
-    return "someValue"#some(G)
+    return some(G, isDAG)
 
 def main():
     path = sys.argv[1] if len(sys.argv) > 1 else FILEPATH
@@ -52,16 +52,18 @@ def main():
     A = RunAlternate(G)
     F = RunFew(G)
     N = RunNone(G)
-    M = S = "?" # keeps "?" if the problem is NP-hard
+    M = S = "?!" # keeps "NP-hard" if the problem is NP-hard
     
     if G.graph["directed"]:
         if nx.is_directed_acyclic_graph(G): # DAG Directed Acyclic
             M = RunMany(G,True)
-            S = RunSome(G)
+            S = RunSome(G, True)
     else: # is undirected
         if nx.is_forest(G.to_undirected()): # undirected Asyclic.
             M = RunMany(G,False)
-        S = RunSome(G)
+        S = RunSome(G, False)
+
+    # If M or S is NOT run above they are NP-hard.
 
     print(f"{G.number_of_nodes():,}", *map(fmt, [A, F, M, N, S]), sep="\t")
 
