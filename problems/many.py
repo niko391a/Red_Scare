@@ -25,7 +25,7 @@ def many(g): # old bruteforce
 
 
 
-def manydp(g,isdag):
+def manydp(G,isdag):
     '''
     First get the red set of all red verticies
 
@@ -47,7 +47,7 @@ def manydp(g,isdag):
         So we loop through all the reds and count them in the for loop
 
     '''
-
+    g = G.copy()
     red_vertices = set()
     for vertex, data in g.nodes(data=True):
             if data.get("color") == "red":

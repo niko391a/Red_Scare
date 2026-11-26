@@ -9,7 +9,9 @@
 # black→black: 0
 import networkx as nx
 
-def few(g):
+def few(G):
+    # copy to local variable to ensure that the weight modified is not propagated to the shared graph.
+    g = G.copy()
     red_vertices = set()
     for vertex, data in g.nodes(data=True):
             if data.get("color") == "red":
